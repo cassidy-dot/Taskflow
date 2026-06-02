@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
+<p class="p1">&lt;title&gt;Taskflow&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--bg: #ffffff; --bg2: #f8f7ff; --bg3: #f1f0f9;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text: #1a1a2e; --text2: #4b5070; --text3: #9490b0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--border: rgba(139,92,246,0.15);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media (prefers-color-scheme: dark) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>:root { --bg:#0f0f1a; --bg2:#16162a; --bg3:#1e1e35; --text:#e9d5ff; --text2:#a89fc0; --text3:#5a5475; --border:rgba(139,92,246,0.2); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 24px 16px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.app { display: flex; width: 100%; max-width: 1100px; min-height: calc(100vh - 48px); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(139,92,246,0.08); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Sidebar */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sidebar { width: 220px; flex-shrink: 0; background: linear-gradient(160deg,#1e0a2e,#0f172a); display: flex; flex-direction: column; padding: 24px 0 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.logo { font-size: 16px; font-weight: 500; color: #e9d5ff; padding: 0 18px 18px; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 16px; display: flex; align-items: center; gap: 9px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.logo-dot { width: 9px; height: 9px; border-radius: 50%; background: linear-gradient(135deg,#f472b6,#818cf8); flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sec-label { font-size: 10px; font-weight: 500; color: rgba(200,180,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 18px; margin-bottom: 6px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.proj-btn { display: flex; align-items: center; gap: 9px; width: 100%; text-align: left; padding: 9px 18px; font-size: 13px; border: none; cursor: pointer; background: transparent; color: rgba(200,180,255,0.6); border-left: 2px solid transparent; transition: all 0.15s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.proj-btn:hover { color: #e9d5ff; background: rgba(255,255,255,0.05); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.proj-btn.active { color: #e9d5ff; background: rgba(255,255,255,0.08); border-left-color: var(--pc); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.proj-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pc); flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.proj-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.proj-count { font-size: 11px; background: rgba(255,255,255,0.1); color: rgba(200,180,255,0.7); border-radius: 99px; padding: 1px 7px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.add-proj-btn { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; padding: 9px 18px; font-size: 13px; border: none; cursor: pointer; background: transparent; color: rgba(200,180,255,0.4); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.add-proj-btn:hover { color: #c084fc; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.new-proj-form { padding: 8px 14px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.new-proj-form input { width: 100%; font-size: 13px; padding: 7px 10px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; background: rgba(255,255,255,0.08); color: #e9d5ff; outline: none; margin-bottom: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.new-proj-form input::placeholder { color: rgba(200,180,255,0.35); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.color-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.swatch { width: 19px; height: 19px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: border-color 0.1s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.swatch.sel { border-color: #fff; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.form-btns { display: flex; gap: 6px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.form-add { flex: 1; padding: 6px; font-size: 12px; border: none; border-radius: 7px; background: linear-gradient(135deg,#818cf8,#c084fc); color: #fff; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.form-cancel { padding: 6px 10px; font-size: 12px; border: none; border-radius: 7px; background: rgba(255,255,255,0.08); color: rgba(200,180,255,0.6); cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sidebar-foot { margin-top: auto; padding: 10px 18px 18px; font-size: 11px; color: rgba(200,180,255,0.3); text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Main */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.main { flex: 1; display: flex; flex-direction: column; background: var(--bg); min-width: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.topbar { display: flex; align-items: center; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.proj-title { font-size: 17px; font-weight: 500; color: var(--text); flex: 1; display: flex; align-items: center; gap: 9px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.title-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pc); flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pct-badge { font-size: 12px; padding: 4px 12px; border-radius: 99px; background: #F5F3FF; color: #6D28D9; font-weight: 500; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.content { flex: 1; overflow-y: auto; padding: 20px 24px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 14px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat-card { border-radius: 13px; padding: 13px 16px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sc-p { background: #F5F3FF; } .sc-b { background: #EFF6FF; } .sc-k { background: #FDF2F8; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat-val { font-size: 26px; font-weight: 500; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sc-p .stat-val { color: #6D28D9; } .sc-b .stat-val { color: #1D4ED8; } .sc-k .stat-val { color: #9D174D; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat-lbl { font-size: 12px; margin-top: 3px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.sc-p .stat-lbl { color: #7C3AED; } .sc-b .stat-lbl { color: #2563EB; } .sc-k .stat-lbl { color: #BE185D; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.prog-track { height: 5px; border-radius: 99px; background: rgba(139,92,246,0.1); margin-bottom: 18px; overflow: hidden; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.prog-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg,#818cf8,#c084fc,#f472b6); transition: width 0.4s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.add-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-input { flex: 2; min-width: 140px; font-size: 13px; padding: 9px 13px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg2); color: var(--text); outline: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-input:focus { border-color: #a78bfa; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.due-input { flex: 1; min-width: 130px; font-size: 13px; padding: 9px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg2); color: var(--text); outline: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.due-input:focus { border-color: #a78bfa; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pri-sel { font-size: 13px; padding: 9px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg2); color: var(--text); outline: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.add-btn { padding: 9px 20px; font-size: 13px; border: none; border-radius: 10px; background: linear-gradient(135deg,#818cf8,#c084fc); color: #fff; cursor: pointer; font-weight: 500; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.group-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); margin-bottom: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-card { display: flex; align-items: center; gap: 9px; padding: 10px 14px; border-radius: 12px; margin-bottom: 7px; border: 1px solid var(--border); background: var(--bg); transition: border-color 0.15s, opacity 0.15s, box-shadow 0.15s; cursor: grab; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-card:hover { border-color: rgba(192,132,252,0.35); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-card.drag-over { border-color: #818cf8; box-shadow: 0 0 0 2px rgba(129,140,248,0.2); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-card.dragging { opacity: 0.35; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.drag-handle { color: rgba(139,92,246,0.25); font-size: 15px; cursor: grab; flex-shrink: 0; user-select: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.status-btn { background: none; border: none; cursor: pointer; font-size: 18px; flex-shrink: 0; padding: 0; line-height: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.s-todo { color: rgba(139,92,246,0.25); } .s-ip { color: #818cf8; } .s-done { color: #f472b6; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-title { flex: 1; font-size: 14px; color: var(--text); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.task-title.done { text-decoration: line-through; color: var(--text3); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.due-badge { font-size: 11px; font-weight: 500; padding: 2px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.pri-badge { font-size: 11px; font-weight: 500; padding: 2px 9px; border-radius: 99px; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.status-sel { font-size: 11px; padding: 3px 7px; border-radius: 8px; border: none; cursor: pointer; font-weight: 500; outline: none; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.del-btn { background: none; border: none; cursor: pointer; color: rgba(139,92,246,0.2); font-size: 15px; padding: 2px; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.del-btn:hover { color: #f472b6; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.empty { text-align: center; color: var(--text3); font-size: 14px; padding: 60px 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.no-proj { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 12px; color: var(--text3); padding: 60px; text-align: center; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.no-proj p { font-size: 14px; }</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div class="app"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Sidebar --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="sidebar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="logo"&gt;&lt;span class="logo-dot"&gt;&lt;/span&gt;Taskflow&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="sec-label"&gt;Projects&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="proj-list"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="new-proj-area"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="add-proj-btn" onclick="showNewProj()"&gt;+ New project&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sidebar-foot"&gt;✦ auto-saved&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Main --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="main"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="topbar" id="topbar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="proj-title" id="proj-title"&gt;Select a project&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="pct-badge" id="pct-badge" style="display:none"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="content" id="content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="no-proj"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="font-size:36px"&gt;✦&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Create a project in the sidebar to get started.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const COLORS = ["#C084FC","#818CF8","#60A5FA","#F472B6","#A78BFA","#38BDF8"];</p>
+<p class="p1">const PRI = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>low:<span class="Apple-converted-space">    </span>{bg:"#EDE9FE",text:"#6D28D9"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>medium: {bg:"#EFF6FF",text:"#1D4ED8"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>high: <span class="Apple-converted-space">  </span>{bg:"#FDF2F8",text:"#9D174D"},</p>
+<p class="p1">};</p>
+<p class="p1">const ST_NEXT<span class="Apple-converted-space">  </span>= {todo:"in-progress","in-progress":"done",done:"todo"};</p>
+<p class="p1">const ST_ICON<span class="Apple-converted-space">  </span>= {todo:"○","in-progress":"◑",done:"●"};</p>
+<p class="p1">const ST_LBL <span class="Apple-converted-space">  </span>= {todo:"To do","in-progress":"In progress",done:"Done"};</p>
+<p class="p1">const ST_STYLE = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>todo:<span class="Apple-converted-space">          </span>{bg:"#F5F3FF",text:"#6D28D9"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>"in-progress": {bg:"#EFF6FF",text:"#1D4ED8"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>done:<span class="Apple-converted-space">          </span>{bg:"#FDF2F8",text:"#9D174D"},</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const KEY = "taskflow-v1";</p>
+<p class="p1">let state = load();</p>
+<p class="p1">let active = state.projects[0]?.id || null;</p>
+<p class="p1">let dragging = null;</p>
+<p class="p1">let newProjColor = COLORS[0];</p>
+<p class="p2"><br></p>
+<p class="p1">function load() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>try { return JSON.parse(localStorage.getItem(KEY)) || {projects:[],tasks:[]}; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>catch { return {projects:[],tasks:[]}; }</p>
+<p class="p1">}</p>
+<p class="p1">function save() { localStorage.setItem(KEY, JSON.stringify(state)); }</p>
+<p class="p1">function genId() { return Math.random().toString(36).slice(2,9); }</p>
+<p class="p2"><br></p>
+<p class="p1">function formatDue(str) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!str) return null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const d = new Date(str + "T00:00:00");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const today = new Date(); today.setHours(0,0,0,0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const diff = Math.round((d - today) / 86400000);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const label = diff &lt; 0 ? Math.abs(diff)+"d overdue" : diff===0?"Today":diff===1?"Tomorrow":diff+"d";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const color = diff &lt; 0 ? "#9D174D" : diff&lt;=1 ? "#854F0B" : "#4B5563";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const bg<span class="Apple-converted-space">    </span>= diff &lt; 0 ? "#FDF2F8" : diff&lt;=1 ? "#FAEEDA" : "#F3F4F6";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return {label,color,bg};</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function render() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderSidebar();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderMain();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderSidebar() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const list = document.getElementById("proj-list");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>list.innerHTML = state.projects.map(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const count = state.tasks.filter(t=&gt;t.projectId===p.id).length;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const cls = p.id===active?"proj-btn active":"proj-btn";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return `&lt;button class="${cls}" style="--pc:${p.color}" onclick="selectProject('${p.id}')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="proj-dot"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="proj-name"&gt;${esc(p.name)}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="proj-count"&gt;${count}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).join("");</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderMain() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const proj = state.projects.find(p=&gt;p.id===active);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!proj) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("proj-title").textContent = "Select a project";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("pct-badge").style.display = "none";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("content").innerHTML = `&lt;div class="no-proj"&gt;&lt;div style="font-size:36px"&gt;✦&lt;/div&gt;&lt;p&gt;Create a project in the sidebar to get started.&lt;/p&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const tasks = state.tasks.filter(t=&gt;t.projectId===active).sort((a,b)=&gt;a.order-b.order);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const done<span class="Apple-converted-space">  </span>= tasks.filter(t=&gt;t.status==="done").length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pct <span class="Apple-converted-space">  </span>= tasks.length ? Math.round(done/tasks.length*100) : 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("proj-title").innerHTML = `&lt;span class="title-dot" style="--pc:${proj.color}"&gt;&lt;/span&gt;${esc(proj.name)}`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const badge = document.getElementById("pct-badge");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>badge.style.display = "";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>badge.textContent = pct+"% done";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const groups = ["in-progress","todo","done"].map(st =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const grp = tasks.filter(t=&gt;t.status===st);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!grp.length) return "";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return `&lt;div style="margin-bottom:18px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="group-label"&gt;${ST_LBL[st]}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${grp.map(t =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const due = formatDue(t.due);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const dueBadge = due ? `&lt;span class="due-badge" style="background:${due.bg};color:${due.color}"&gt;${due.label}&lt;/span&gt;` : "";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return `&lt;div class="task-card" id="tc-${t.id}" draggable="true"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>ondragstart="onDragStart(event,'${t.id}')"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>ondragover="onDragOver(event,'${t.id}')"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>ondrop="onDrop(event,'${t.id}')"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>ondragend="onDragEnd()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="drag-handle"&gt;⠿&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="status-btn s-${st==='in-progress'?'ip':st}" onclick="cycleStatus('${t.id}')"&gt;${ST_ICON[t.status]}&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="task-title${t.status==='done'?' done':''}" title="${esc(t.title)}"&gt;${esc(t.title)}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>${dueBadge}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="pri-badge" style="background:${PRI[t.priority].bg};color:${PRI[t.priority].text}"&gt;${t.priority}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;select class="status-sel" style="background:${ST_STYLE[t.status].bg};color:${ST_STYLE[t.status].text}" onchange="updateStatus('${t.id}',this.value)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="todo"${t.status==="todo"?" selected":""}&gt;To do&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="in-progress"${t.status==="in-progress"?" selected":""}&gt;In progress&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="done"${t.status==="done"?" selected":""}&gt;Done&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="del-btn" onclick="deleteTask('${t.id}')"&gt;✕&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}).join("")}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).join("");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("content").innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="stats"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat-card sc-p"&gt;&lt;div class="stat-val"&gt;${tasks.length}&lt;/div&gt;&lt;div class="stat-lbl"&gt;Total&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat-card sc-b"&gt;&lt;div class="stat-val"&gt;${tasks.filter(t=&gt;t.status==="in-progress").length}&lt;/div&gt;&lt;div class="stat-lbl"&gt;In progress&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat-card sc-k"&gt;&lt;div class="stat-val"&gt;${done}&lt;/div&gt;&lt;div class="stat-lbl"&gt;Done&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="prog-track"&gt;&lt;div class="prog-fill" style="width:${pct}%"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="add-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input class="task-input" id="task-input" placeholder="Add a task…" onkeydown="if(event.key==='Enter')addTask()" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input class="due-input" id="due-input" type="date" title="Due date" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;select class="pri-sel" id="pri-sel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="low"&gt;Low&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="medium" selected&gt;Medium&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="high"&gt;High&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="add-btn" onclick="addTask()"&gt;Add&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>${groups || '&lt;div class="empty"&gt;No tasks yet — add one above.&lt;/div&gt;'}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function esc(s) { return String(s).replace(/&amp;/g,"&amp;amp;").replace(/&lt;/g,"&amp;lt;").replace(/&gt;/g,"&amp;gt;").replace(/"/g,"&amp;quot;"); }</p>
+<p class="p2"><br></p>
+<p class="p1">function selectProject(id) { active = id; render(); }</p>
+<p class="p2"><br></p>
+<p class="p1">function showNewProj() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>newProjColor = COLORS[0];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("new-proj-area").innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="new-proj-form"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input id="np-input" placeholder="Project name…" onkeydown="if(event.key==='Enter')addProject()" autofocus /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="color-row"&gt;${COLORS.map(c=&gt;`&lt;div class="swatch${c===newProjColor?" sel":""}" style="background:${c}" onclick="pickColor('${c}',this)"&gt;&lt;/div&gt;`).join("")}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="form-btns"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="form-add" onclick="addProject()"&gt;Add&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="form-cancel" onclick="cancelNewProj()"&gt;Cancel&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(()=&gt;document.getElementById("np-input")?.focus(),50);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function pickColor(c, el) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>newProjColor = c;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll(".swatch").forEach(s=&gt;s.classList.remove("sel"));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>el.classList.add("sel");</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function cancelNewProj() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("new-proj-area").innerHTML = `&lt;button class="add-proj-btn" onclick="showNewProj()"&gt;+ New project&lt;/button&gt;`;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function addProject() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const name = document.getElementById("np-input")?.value?.trim();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!name) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const id = genId();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.projects.push({id, name, color: newProjColor});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save(); active = id;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>cancelNewProj();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function addTask() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const title = document.getElementById("task-input")?.value?.trim();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!title) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const due = document.getElementById("due-input")?.value || "";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const priority = document.getElementById("pri-sel")?.value || "medium";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const maxOrder = state.tasks.filter(t=&gt;t.projectId===active).reduce((m,t)=&gt;Math.max(m,t.order),-1)+1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.tasks.push({id:genId(), projectId:active, title, priority, status:"todo", due, order:maxOrder});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save(); render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function cycleStatus(id) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const t = state.tasks.find(t=&gt;t.id===id);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (t) { t.status = ST_NEXT[t.status]; save(); render(); }</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function updateStatus(id, val) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const t = state.tasks.find(t=&gt;t.id===id);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (t) { t.status = val; save(); render(); }</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function deleteTask(id) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.tasks = state.tasks.filter(t=&gt;t.id!==id);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save(); render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function onDragStart(e, id) { dragging = id; e.dataTransfer.effectAllowed = "move"; setTimeout(()=&gt;{ const el=document.getElementById("tc-"+id); if(el) el.classList.add("dragging"); },0); }</p>
+<p class="p1">function onDragOver(e, id)<span class="Apple-converted-space">  </span>{ e.preventDefault(); if (dragging!==id) { document.querySelectorAll(".task-card").forEach(el=&gt;el.classList.remove("drag-over")); const el=document.getElementById("tc-"+id); if(el) el.classList.add("drag-over"); } }</p>
+<p class="p1">function onDrop(e, targetId) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!dragging || dragging===targetId) { onDragEnd(); return; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const projTasks = state.tasks.filter(t=&gt;t.projectId===active).sort((a,b)=&gt;a.order-b.order);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const si = projTasks.findIndex(t=&gt;t.id===dragging);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const ti = projTasks.findIndex(t=&gt;t.id===targetId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [moved] = projTasks.splice(si,1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>projTasks.splice(ti,0,moved);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>projTasks.forEach((t,i)=&gt;{ const x=state.tasks.find(x=&gt;x.id===t.id); if(x) x.order=i; });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>dragging = null; save(); render();</p>
+<p class="p1">}</p>
+<p class="p1">function onDragEnd() { dragging=null; document.querySelectorAll(".task-card").forEach(el=&gt;{ el.classList.remove("dragging","drag-over"); }); }</p>
+<p class="p2"><br></p>
+<p class="p1">render();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
